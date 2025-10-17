@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Compiles and runs a specific day's code
+
+if [ -z "$1" ]; then
+  echo "Usage: run <day>"
+  exit 1
+fi
+
+DAY=$(printf "%02d" "$1")
+
+echo "Building TS 😈..."
+npx tsc || exit 1;
+
+echo "Running that john 🙏...\n-----------"
+node "dist/day${DAY}/index.js"
