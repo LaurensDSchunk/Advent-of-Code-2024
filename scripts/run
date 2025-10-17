@@ -2,15 +2,17 @@
 
 # Compiles and runs a specific day's code
 
-if [ -z "$1" ]; then
-  echo "Usage: scripts/run <day>"
+if [ -z "$1" ] || [ -z "$2" ]; then
+  echo "Usage: scripts/run <day> <part>"
   exit 1
 fi
 
 DAY=$(printf "%02d" "$1")
+PART=$2
 
 echo "Building TS 😈..."
 npx tsc || exit 1;
 
-echo "Running that john 🙏...\n-----------"
-node "dist/day${DAY}/index.js"
+echo "Running that john 🙏..."
+echo "---------------"
+node "dist/day${DAY}/part${PART}.js"
