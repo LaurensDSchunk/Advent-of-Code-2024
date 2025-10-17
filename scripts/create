@@ -22,13 +22,14 @@ fi
 bash ./scripts/download "$1"
 
 # Creates input file with starter code if its not there
+DEFAULT_CODE="import getInput from \"../utils/getInput\"\n\nconst input = getInput($1).split(\"\\\n\");\n\n\n\n\n\nconsole.log(0);"
 if [ -f "$DIR/part1.ts" ]; then
   echo "Part 1 codes already in the house my man"
 else 
   echo "Creating part 1 code file..."
   touch "$DIR/part1.ts"
   echo "Filling code file..."
-  echo -e "import getInput from \"../utils/getInput\"\n\nconst input = getInput($1);" > "$DIR/part1.ts"
+  printf "$DEFAULT_CODE" > "$DIR/part1.ts"
 fi
 
 if [ -f "$DIR/part2.ts" ]; then
@@ -37,7 +38,7 @@ else
   echo "Creating part 2 code file..."
   touch "$DIR/part2.ts"
   echo "Filling code file..."
-  echo -e "import getInput from \"../utils/getInput\"\n\nconst input = getInput($1);" > "$DIR/part2.ts"
+  printf "$DEFAULT_CODE" > "$DIR/part2.ts"
 fi
 
-echo "All good sigma. Time to grind ✅💰💵"
+echo "All good sigma ✊. Time to grind ✅💰💵"
