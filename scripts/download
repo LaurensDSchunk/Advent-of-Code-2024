@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Downloads the input for a specific day to the input file
+
+if [ -z "$1" ]; then
+  echo "Usage: scripts/download <day>"
+  exit 1
+fi
+
+RAW_DAY=$1
+DAY=$(printf "%02d" "$1")
+DIR="day${DAY}"
+INPUT_FILE="$DIR/input.txt"
+
+mkdir -p "$DIR"
+
+# Load .env variables
+if [ -f ".env" ]; then
+  export $(grep -v '^#' .env | xargs)
+fi
+
+YEAR=${YEAR}
+SESSION=${AOC_SESSION}
+
+if [ -z "$SESSION" ]; then
+  echo "Please set your AOC_SESSION environment variable."
+  exit 1
+fi
+
+if [ -z "$YEAR" ]; then
+  echo "Please set your YEAR environment variable."
+  exit 1
+fi
+
+# Downloads the input from the server
+echo "Downloading input for day $RAW_DAY of $YEAR..."
+INPUT=$(curl -s -f -H "Cookie: session=${AOC_SESSION}" "https://adventofcode.com/${YEAR}/day/${RAW_DAY}/input")
+
+# Check if curl succeeded
+if [ $? -ne 0 ] || [ -z "$INPUT" ]; then
+  echo "Failed to download input (maybe invalid session or day not unlocked?)."
+  exit 1
+fi
+
+#Creates input file if its missing
+if [ ! -f "$INPUT_FILE" ]; then
+  echo "Creating input file..."
+  touch "$INPUT_FILE"  
+fi
+
+# Fills the input file if it is empty
+if [ ! -s "$INPUT_FILE" ]; then
+  echo "Filling input file..."
+  printf "%s" "$INPUT" > "$INPUT_FILE"
+fi

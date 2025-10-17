@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Creates a day's directory with ts file and txt file to dump the input
+# Creates a day's directory with ts file and attempts to download the input
 
 if [ -z "$1" ]; then
-  echo "Usage: run <day>"
+  echo "Usage: scripts/create <day>"
   exit 1
 fi
 
@@ -18,13 +18,8 @@ else
   mkdir "$DIR"
 fi
 
-# Creates input if its missing
-if [ -f "$DIR/input.txt" ]; then
-  echo "Input files already there 😅"
-else 
-  echo "Creating input file..."
-  touch "$DIR/input.txt"
-fi
+# Downloads the input, putting it into the correct file
+bash ./scripts/download "$1"
 
 # Creates input file with starter code if its not there
 if [ -f "$DIR/index.ts" ]; then
@@ -32,7 +27,8 @@ if [ -f "$DIR/index.ts" ]; then
 else 
   echo "Creating code file..."
   touch "$DIR/index.ts"
-  echo -e "import readInput from \"../utils/readInput.js\"\n\nconst input = readInput($1);" > "$DIR/index.ts"
+  echo "Filling code file..."
+  echo -e "import getInput from \"../utils/getInput\"\n\nconst input = getInput($1);" > "$DIR/index.ts"
 fi
 
 echo "All good sigma. Time to grind ✅💰💵"

@@ -5,5 +5,7 @@
 # I MADE A SUPER AWESOME DEV SYSTEM
 - **To create a day**, run /scripts/create {day}
 - **To run a day**, run /scripts/run {day}
+- **To download a day's input**, run /scripts/download {day}
+  - This is only for if the day has already been created.
 
 The day creation makes the directory with input and code files. The code file is pre-populated with a variable containing the input.

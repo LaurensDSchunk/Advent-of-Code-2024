@@ -3,7 +3,7 @@
 # Compiles and runs a specific day's code
 
 if [ -z "$1" ]; then
-  echo "Usage: run <day>"
+  echo "Usage: scripts/run <day>"
   exit 1
 fi
 
