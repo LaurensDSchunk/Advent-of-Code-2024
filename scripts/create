@@ -21,6 +21,12 @@ fi
 # Downloads the input, putting it into the correct file
 bash ./scripts/download "$1"
 
+# Creates the test file if it doesn't exist
+if [ ! -f "$DIR/test.txt" ]; then 
+  echo "Creating Test File..."
+  touch "$DIR/test.txt"
+fi
+
 # Creates input file with starter code if its not there
 DEFAULT_CODE="import getInput from \"../utils/getInput\"\n\nconst input = getInput($1).split(\"\\\n\");\n\n\n\n\n\nconsole.log(0);"
 if [ -f "$DIR/part1.ts" ]; then
