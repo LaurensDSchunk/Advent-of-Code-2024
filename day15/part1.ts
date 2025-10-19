@@ -46,7 +46,6 @@ for (let move of moves) {
   moveRobot(move);
 }
 
-
 let total = 0;
 for (let y = 0; y < height; y++) {
   for (let x = 0; x < width; x++) {

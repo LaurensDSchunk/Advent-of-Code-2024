@@ -10,9 +10,6 @@ fi
 DAY=$(printf "%02d" "$1")
 PART=$2
 
-echo "Building TS 😈..."
-npx tsc || exit 1;
-
 echo "Running that john 🙏..."
 echo "---------------"
-node "dist/day${DAY}/part${PART}.js"
+npx ts-node "day${DAY}/part${PART}.ts"
